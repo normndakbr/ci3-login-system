@@ -10,12 +10,12 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Buat Akun Baru</h1>
                         </div>
-                        <form class="user">
+                        <form class="user" method="post" action="<?= base_url('auth/registration'); ?>">
                             <div class="form-group">
                                 <input type="text" id="name" name="name" class="form-control form-control-user" id="exampleInputEmail" placeholder="Nama User">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="email" name="name" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                                <input type="text" id="email" name="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
