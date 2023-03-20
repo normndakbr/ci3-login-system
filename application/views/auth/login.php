@@ -45,7 +45,7 @@
                                     <a class="small" href="forgot-password.html">Lupa Kata Sandi?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth/register'); ?>">Buat Akun Baru</a>
+                                    <a class="small" href="<?= base_url('auth/registration'); ?>">Buat Akun Baru</a>
                                 </div>
                             </div>
                         </div>
