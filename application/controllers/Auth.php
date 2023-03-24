@@ -22,6 +22,11 @@ class Auth extends CI_Controller
     {
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('password1', 'Password1', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Password tidak sama!',
+            'min_length' => 'Password terlalu pendek!',
+        ]);
+        $this->form_validation->set_rules('password2', 'Password2', 'required|trim|matches[password1]');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'User Registration';
@@ -29,6 +34,7 @@ class Auth extends CI_Controller
             $this->load->view('auth/registration');
             $this->load->view('templates/auth_footer');
         } else {
+            $data = [];
             echo 'New data created successfully';
         }
     }
