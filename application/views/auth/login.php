@@ -14,8 +14,9 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Land Asset System</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">CI3 Login System</h1>
                                 </div>
+                                <?= $this->session->flashdata('register_message') ?>
                                 <form class="email" method="post" action="<?= base_url('auth/login'); ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="email" placeholder="Email">

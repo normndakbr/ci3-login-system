@@ -22,11 +22,11 @@
                             <div class=" form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="password" id="password1" name="password1" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" value="<?= set_value('password1') ?>">
-                                    <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class=" col-sm-6">
                                     <input type="password" id="password2" name="password2" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Konfirmasi Password" value="<?= set_value('password2') ?>">
                                 </div>
+                                <?= form_error('password1', '<small class="text-danger pl-4 pt-1">', '</small>'); ?>
                             </div>
                             <button type=" submit" class="btn btn-primary btn-user btn-block">
                                 Register Akun
@@ -38,7 +38,7 @@
                             <a class="small" href="forgot-password.html">Lupa Password?</a>
                         </div>
                         <div class="text-center">
-                            <a class="small" href="<?= base_url('auth'); ?>">Sudah punya akun? Masuk!</a>
+                            <p class="small">Sudah punya akun? <a href="<?= base_url('auth'); ?>">Masuk!</a></p>
                         </div>
                     </div>
                 </div>
