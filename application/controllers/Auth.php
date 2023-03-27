@@ -112,7 +112,6 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
-
     public function logout()
     {
         $this->session->unset_userdata('email');
