@@ -35,8 +35,38 @@ class Auth extends CI_Controller
         $password = $this->input->post('password_login');
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
-        var_dump($user);
-        die;
+
+        if ($user) {
+            if ($user['is_active'] == 1) {
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id'],
+                    ];
+
+                    $this->session->set_userdata($data);
+                    redirect('user');
+                } else {
+                    $this->session->set_flashdata('register_message', '
+                    <div class="alert alert-danger" role="alert">
+                        Password anda salah.
+                    </div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('register_message', '
+                <div class="alert alert-warning" role="alert">
+                    Akun belum diaktivasi, silahkan hubungi admin.
+                </div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('register_message', '
+                <div class="alert alert-danger" role="alert">
+                    Akun tidak ditemukan.
+                </div>');
+            redirect('auth');
+        }
     }
 
     public function registration()
@@ -68,7 +98,7 @@ class Auth extends CI_Controller
                 'name' => $this->input->post('name'),
                 'email' => $this->input->post('email'),
                 'image' => 'default.jpg',
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 1,
                 'date_created' => time()
@@ -81,5 +111,16 @@ class Auth extends CI_Controller
             </div>');
             redirect('auth');
         }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('register_message', '
+        <div class="alert alert-success" role="alert">
+            Anda telah berhasil logout dari sistem.
+        </div>');
+        redirect('auth');
     }
 }
