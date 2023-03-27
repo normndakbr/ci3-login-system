@@ -35,8 +35,32 @@ class Auth extends CI_Controller
         $password = $this->input->post('password_login');
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
-        var_dump($user);
-        die;
+
+        if ($user) {
+            if ($user['is_active'] == 1) {
+                if (password_verify($password, $user['password'])) {
+
+                } else {
+                    $this->session->set_flashdata('register_message', '
+                    <div class="alert alert-danger" role="alert">
+                        Password anda salah.
+                    </div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('register_message', '
+                <div class="alert alert-warning" role="alert">
+                    Akun belum diaktivasi, silahkan hubungi admin.
+                </div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('register_message', '
+                <div class="alert alert-danger" role="alert">
+                    Akun tidak ditemukan.
+                </div>');
+            redirect('auth');
+        }
     }
 
     public function registration()

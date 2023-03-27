@@ -19,7 +19,7 @@
                                 <?= $this->session->flashdata('register_message') ?>
                                 <form class="email" method="post" action="<?= base_url('auth'); ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="email_login" placeholder="Email" value="<?= set_value('email_login') ?>">
+                                        <input type="text" class="form-control form-control-user" id="email_login" name="email_login" placeholder="Email" value="<?= set_value('email_login') ?>">
                                         <?= form_error('email_login', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
