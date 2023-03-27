@@ -17,12 +17,14 @@
                                     <h1 class="h4 text-gray-900 mb-4">CI3 Login System</h1>
                                 </div>
                                 <?= $this->session->flashdata('register_message') ?>
-                                <form class="email" method="post" action="<?= base_url('auth/login'); ?>">
+                                <form class="email" method="post" action="<?= base_url('auth'); ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="email" placeholder="Email">
+                                        <input type="text" class="form-control form-control-user" id="email_login" placeholder="Email" value="<?= set_value('email_login') ?>">
+                                        <?= form_error('email_login', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="password_login" name="password_login" placeholder="Password">
+                                        <?= form_error('password_login', '<small class="text-danger pl-2 pt-1">', '</small>'); ?>
                                     </div>
                                     <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
