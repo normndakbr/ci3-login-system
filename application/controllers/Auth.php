@@ -12,10 +12,31 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'User Login';
-        $this->load->view('templates/auth_header', $data);
-        $this->load->view('auth/login');
-        $this->load->view('templates/auth_footer');
+        $this->form_validation->set_rules('email_login', 'Email', 'required|trim|valid_email', [
+            'required' => 'Email tidak boleh kosong.',
+        ]);
+        $this->form_validation->set_rules('password_login', 'Password', 'trim|required', [
+            'required' => 'Password tidak boleh kosong.',
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'User Login';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $this->_login();
+        }
+    }
+
+    private function _login()
+    {
+        $email = $this->input->post('email_login');
+        $password = $this->input->post('password_login');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        var_dump($user);
+        die;
     }
 
     public function registration()
@@ -50,7 +71,7 @@ class Auth extends CI_Controller
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 1,
-                'created_date' => time()
+                'date_created' => time()
             ];
 
             $this->db->insert('user', $data);
